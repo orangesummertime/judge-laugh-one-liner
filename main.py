@@ -25,6 +25,11 @@ def main():
     with open(path, "w", encoding="utf-8") as f:
         f.write(LINE)
     os.chmod(path, 0o644)
+    # Read the file back and verify the gate sees exactly what we wrote.
+    with open(path, "r", encoding="utf-8") as f:
+        written = f.read()
+    assert written == LINE, "entry.txt does not match the line"
+    assert 1 <= len(written) <= 200, "written entry is outside 1-200 chars"
 
 
 if __name__ == "__main__":
